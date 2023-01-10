@@ -1,5 +1,6 @@
 <div class="container mt-5">
   <div class="row row-cols-1 row-cols-md-2 row-colds-lg-4 g-4">
+
     <div class="card-container">
       <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
@@ -11,13 +12,25 @@
               <h5 class="card-title"><%= @restaurant.name %></h5>
               <p><%= @restaurant.address %></p>
               <p class="tag"><%= @restaurant.category %></p>
+              <p><%= link_to "Add a review", new_restaurant_review_path(@restaurant), class: "btn btn-primary" %></p>
             </div>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 
+
+  <% if @restaurant.reviews.any? %>
+    <div class="reviews-container">
+      <% @restaurant.reviews.each do |review| %>
+        <div class="review">
+          <p><%= review.content %> - <%= review.created_at %></p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
   <%= link_to "Go back to restaurants", restaurants_path, class: "btn btn-secondary" %>
 
 </div>
