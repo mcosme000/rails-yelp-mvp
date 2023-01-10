@@ -44,6 +44,7 @@ gem "bootsnap", require: false
 
 # Custom GEMS
 gem "simple_form", github: "heartcombo/simple_form"
+gem 'faker'
 
 
 # Use Sass to process CSS
