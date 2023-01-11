@@ -1,29 +1,29 @@
-<div class="container mt-5">
+<div class="container margin-top">
 
 <div class="d-flex justify-content-between align-items-center">
-  <h1>List of restaurants</h1>
-  <%= link_to "Add a restaurant", new_restaurant_path, :class => 'btn btn-primary'%>
+  <h1>Featured restaurants</h1>
+  <p></p><%= link_to "Add restaurant", new_restaurant_path, :class => 'btn btn-primary'%>
 </div>
 
-
-  <div class="row row-cols-1 row-cols-md-2 row-colds-lg-4 g-4">
-    <% @restaurants.each do |restaurant| %>
-      <div class="card-container">
-        <div class="card mb-3" style="max-width: 540px;">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="https://images.unsplash.com/photo-1615546099385-d537225da73b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1182&q=80" class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title"><%= restaurant.name %></h5>
-                <p class="tag"><%= restaurant.category %></p>
-                <p class="card-text"><small class="text-muted"><%= link_to "Details", restaurant_path(restaurant) %></small></p>
-              </div>
-            </div>
-          </div>
-        </div>
+<div class="restaurants-container">
+  <% @restaurants.each do |restaurant| %>
+    <div class="restaurant-card d-flex">
+      <div class="img-container">
+        <%= image_tag "0#{rand(1..9)}.jpg" %>
       </div>
-    <% end %>
-  </div>
+      <div class="card-content p-3 d-flex flex-column justify-content-between">
+        <h4><%= restaurant.name %></h4>
+        <div class="d-flex justify-content-between align-items-center">
+          <p class="tag"><%= restaurant.category %></p>
+          <% if restaurant.reviews.any? %>
+          <p><i class="fa-solid fa-pen-to-square"></i> <%= restaurant.reviews.count %></p>
+        <% end %>
+        </div>
+        <p class="card-text"><small class="text-muted">
+        <%= link_to "Details", restaurant_path(restaurant), class: "btn-small" %></small></p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
 </div>

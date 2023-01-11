@@ -1,27 +1,22 @@
+
+<div class="banner margin-top">
+  <%= image_tag "0#{rand(1..9)}.jpg"%>
+</div>
+
 <div class="container mt-5">
-  <div class="row row-cols-1 row-cols-md-2 row-colds-lg-4 g-4">
-
-    <div class="card-container">
-      <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="https://images.unsplash.com/photo-1615546099385-d537225da73b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1182&q=80" class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title"><%= @restaurant.name %></h5>
-              <p><%= @restaurant.address %></p>
-              <p class="tag"><%= @restaurant.category %></p>
-              <p><%= link_to "Add a review", new_restaurant_review_path(@restaurant), class: "btn btn-primary" %></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+  <%= link_to "Go back to restaurants", restaurants_path, class: "btn-small" %>
+  <hr>
+  <div class="d-flex align-items-center">
+    <h1 class="card-title"><%= @restaurant.name %></h1>
+    <% if @restaurant.reviews.any? %>
+     <p>Rating: total rating / total reviews</p>
+    <% end %>
   </div>
+  <p><i class="fa-solid fa-location-dot"></i> <%= @restaurant.address %></p>
+  <p class="tag"><%= @restaurant.category %></p>
 
-
+  <hr class="mt-3">
+  <p><%= link_to "Add a review", new_restaurant_review_path(@restaurant), class: "btn btn-primary" %></p>
   <% if @restaurant.reviews.any? %>
     <div class="reviews-container">
       <% @restaurant.reviews.each do |review| %>
@@ -31,6 +26,4 @@
       <% end %>
     </div>
   <% end %>
-  <%= link_to "Go back to restaurants", restaurants_path, class: "btn btn-secondary" %>
-
 </div>
